@@ -19,35 +19,55 @@ public class RobotBase
             
             //Direction.NORTH, EAST, SOUTH, WEST
             //Definicion de la ubicacion del robot, Ciudad, posicion, Direccion, Numero things en el bolso.
-            estudiante = new Robot(objetos,0, 2, Direction.EAST,10);
+            estudiante = new Robot(objetos,1, 2, Direction.SOUTH,0);
             
 	    //Mover una interseccion en el sentido al cual este apuntando el objeto.
-            estudiante.move ();
+
             
-            //Girar a la izquierda
-            estudiante.turnLeft();
+            
             
             //Tomando decisiones, Si puedo tomar un Thing
             boolean puedeTomar = estudiante.canPickThing();
             
+            for(int i=0; i<4; i++){
+            estudiante.move();
             //Tomar un Thing
-            if(puedeTomar == true)
+            while(puedeTomar==true){
+            //if(puedeTomar == true)
                estudiante.pickThing();
-            
+            }
             //Especifica el numero de Thing que tiene en robot en el bolso
             int numeroThings = estudiante.countThingsInBackpack();
             
+            //estudiante.pickThing();
+            
+
             //Poner Thing, se debe validar que tenga things en el bolso
-            estudiante.putThing();
+            //estudiante.putThing();
+            estudiante.turnLeft();
+            //Número de pasos que Karel da plantando
+            int pasos = 0;
+            while(numeroThings>0){
+                estudiante.move();
+                estudiante.putThing();
+                pasos++;
+            }
+            creacionFuncion2(2);
+            while(pasos>0){
+                estudiante.move();
+                pasos--;
+            }
+            estudiante.turnLeft();
+        }
                        
             //Si el frente esta libre de Wall
-            estudiante.frontIsClear();
+            //estudiante.frontIsClear();
             
             //Invocando una funcion
-            creacionFuncion(4);
+            //creacionFuncion(4);
             
             //Toman un Thing
-            estudiante.pickThing();
+            //estudiante.pickThing();
             
             
 	}
@@ -55,6 +75,10 @@ public class RobotBase
         public static void creacionFuncion(int parametroEntrada){
             for (int i = 0; i < parametroEntrada; i++) 
                 estudiante.move();
+        }
+        public static void creacionFuncion2(int parametroEntrada){
+            for (int i = 0; i < parametroEntrada; i++) 
+                estudiante.turnLeft();
         }
 }
 
