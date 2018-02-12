@@ -19,7 +19,7 @@ public class RobotBase
             
             //Direction.NORTH, EAST, SOUTH, WEST
             //Definicion de la ubicacion del robot, Ciudad, posicion, Direccion, Numero things en el bolso.
-            estudiante = new Robot(objetos,1, 2, Direction.SOUTH,0);
+            estudiante = new Robot(objetos,10, 1, Direction.EAST,0);
             
 	    //Mover una interseccion en el sentido al cual este apuntando el objeto.
 
@@ -27,47 +27,22 @@ public class RobotBase
             
             
             //Tomando decisiones, Si puedo tomar un Thing
-            boolean puedeTomar = estudiante.canPickThing();
-            
-            for(int i=0; i<4; i++){
-            estudiante.move();
-            //Tomar un Thing
-            while(puedeTomar==true){
-            //if(puedeTomar == true)
-               estudiante.pickThing();
-            }
-            //Especifica el numero de Thing que tiene en robot en el bolso
-            int numeroThings = estudiante.countThingsInBackpack();
-            
-            //estudiante.pickThing();
-            
-
-            //Poner Thing, se debe validar que tenga things en el bolso
-            //estudiante.putThing();
-            estudiante.turnLeft();
-            //Número de pasos que Karel da plantando
-            int pasos = 0;
-            while(numeroThings>0){
-                estudiante.move();
-                estudiante.putThing();
-                pasos++;
-            }
-            creacionFuncion2(2);
-            while(pasos>0){
-                estudiante.move();
-                pasos--;
-            }
-            estudiante.turnLeft();
-        }
+                  
+        
                        
-            //Si el frente esta libre de Wall
-            //estudiante.frontIsClear();
-            
-            //Invocando una funcion
-            //creacionFuncion(4);
-            
-            //Toman un Thing
-            //estudiante.pickThing();
+        while(!estudiante.canPickThing()){
+            while(!estudiante.frontIsClear()){
+                estudiante.turnLeft();
+                estudiante.move();
+                creacionFuncion2(3);
+            }
+            estudiante.move();
+            estudiante.turnLeft();
+            while(estudiante.frontIsClear()){
+                estudiante.move();
+            }
+            creacionFuncion2(3);
+        }
             
             
 	}
